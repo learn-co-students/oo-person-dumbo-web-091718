@@ -26,6 +26,7 @@ class Person
       @hygiene = 0
     end
   end
+
   def happy?
     @happiness > 7 ? true : false
   end
@@ -33,30 +34,25 @@ class Person
   def clean?
     @hygiene > 7 ? true : false
   end
+  
   def get_paid(salary)
     @bank_account+=salary
     'all about the benjamins'
   end
 
   def take_bath
-    value = @hygiene + 4
-    self.hygiene=(value)
+    self.hygiene += 4
     '♪ Rub-a-dub just relaxing in the tub ♫'
   end
 
   def work_out
-    value = @hygiene - 3
-    self.hygiene=(value)
-
-    value2 = @happiness + 2
-    self.happiness=(value2)
-
+    self.hygiene -= 3
+    self.happiness += 2
     '♪ another one bites the dust ♫'
   end
 
   def call_friend(person)
-    value = @happiness + 3
-    self.happiness=(value)
+    self.happiness += 3
     person.happiness += 3
     "Hi #{person.name}! It's #{self.name}. How are you?"
   end
