@@ -2,92 +2,67 @@
 require 'pry'
 
 class Person
+  attr_reader :name, :happiness, :hygiene
+  attr_accessor :bank_account
+  
   def initialize(name)
     @name = name
-    @bankaccount = 25
-    @happiness_index = 8
-    @max_value = 10
-    @min_value = 0
+    @bank_account = 25
+    @happiness = 8
     @hygiene = 8
   end
-
-  def name
-    @name
-  end
-
-  def bank_account
-    @bankaccount
-  end
-
-  def bank_account=(bankaccount)
-    @bankaccount = bankaccount
-  end
-
-  def happiness
-    @happiness_index
-  end
-
-  def happiness=(happiness_index)
-    @happiness_index = happiness_index
-    if @happiness_index > @max_value
-      @happiness_index = @max_value
-    elsif @happiness_index < @min_value
-      @happiness_index =  @min_value
+  
+  def happiness=(n)
+    if n >= 10
+      @happiness = 10
+    elsif n <= 0
+      @happiness = 0
+    else
+      @happiness = n
     end
   end
-
-  def hygiene
-    @hygiene
-  end
-
-  def hygiene=(hygiene)
-    @hygiene = hygiene
-    if @hygiene > @max_value
-      @hygiene = @max_value
-    elsif @hygiene < @min_value
-      @hygiene =  @min_value
+  
+  def hygiene=(n)
+    if n >= 10
+      @hygiene = 10
+    elsif n <= 0
+      @hygiene = 0
+    else
+      @hygiene = n
     end
   end
-
+  
   def happy?
-    if @happiness_index > 7
-      return true
-    else
-      return false
-    end
+    @happiness > 7
   end
-
+  
   def clean?
-    if @hygiene > 7
-      return true
-    else
-      return false
-    end
+    @hygiene > 7
   end
-
+  
   def get_paid(salary)
-    @bankaccount += salary
+    @bank_account += salary
     return "all about the benjamins"
   end
-
+  
   def take_bath
-    self.hygiene=self.hygiene + 4
+    self.hygiene += 4
+    hygiene=(self.hygiene)
     return "♪ Rub-a-dub just relaxing in the tub ♫"
   end
-
+  
   def work_out
-    self.hygiene=self.hygiene - 3
-    self.happiness=self.happiness + 2
+    self.hygiene -= 3
+    self.happiness += 2
     return "♪ another one bites the dust ♫"
   end
-
-
+  
   def call_friend(friend)
     self.happiness += 3
     friend.happiness += 3
-    return "Hi #{friend.name}! It's #{@name}. How are you?"
+    return "Hi #{friend.name}! It's #{self.name}. How are you?"
   end
-
+  
   def start_conversation(person, topic)
     if topic == "politics"
       self.happiness -= 2
@@ -97,7 +72,7 @@ class Person
       self.happiness += 1
       person.happiness += 1
       return "blah blah sun blah rain"
-    else
+    elsif topic == "programming"
       return "blah blah blah blah blah"
     end
   end
